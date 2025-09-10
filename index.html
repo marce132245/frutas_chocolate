@@ -121,13 +121,16 @@
             background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.1);
             transition: all 0.3s ease;
             color: white;
             cursor: pointer;
             position: relative;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
@@ -188,27 +191,33 @@
             50% { transform: scale(1.2); }
         }
 
-        .product-emoji {
-            font-size: 4rem;
+        .product-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            object-fit: cover;
             margin-bottom: 1rem;
-            animation: bounce 2s ease-in-out infinite;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+        .product-card:hover .product-image {
+            transform: scale(1.05);
         }
 
         .product-title {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: #FFD700;
+            flex-grow: 0;
         }
 
         .product-description {
             opacity: 0.9;
             line-height: 1.6;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
         }
 
         .footer {
@@ -296,6 +305,68 @@
         .floating-fruit:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
         .floating-fruit:nth-child(3) { top: 60%; left: 5%; animation-delay: 2s; }
         .floating-fruit:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 3s; }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 8px 16px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: bounce-whatsapp 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 24px rgba(37, 211, 102, 0.5);
+            background: linear-gradient(45deg, #128C7E, #25D366);
+        }
+
+        @keyframes bounce-whatsapp {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
 
         /* MODAL/CARTA STYLES */
         .modal {
@@ -462,6 +533,7 @@
             .modal-content { padding: 20px; margin: 10px; }
             .modal-title { font-size: 1.5rem; }
             .modal-price { font-size: 1.5rem; }
+            .whatsapp-float { width: 50px; height: 50px; font-size: 24px; bottom: 20px; right: 20px; }
             
             .click-indicator {
                 display: block;
@@ -480,6 +552,12 @@
         <div class="floating-fruit">🫐</div>
         <div class="floating-fruit">🍇</div>
     </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/50323456789?text=¡Hola!%20Me%20interesan%20sus%20productos%20de%20frutas%20con%20chocolate" class="whatsapp-float" target="_blank">
+        <span>💬</span>
+        <div class="whatsapp-tooltip">¡Escríbenos por WhatsApp!</div>
+    </a>
 
     <section class="hero">
         <div class="hero-content">
@@ -500,64 +578,28 @@
         <div class="products-grid">
             <div class="product-card" onclick="openModal('fresas')">
                 <div class="click-indicator">¡Toca aquí!</div>
-                <div class="product-emoji">🍓🍫</div>
+                <img src="WhatsApp_Image_2025-09-09_at_8.11.34_PM-removebg-preview.png" alt="Fresas con Chocolate" class="product-image">
                 <h3 class="product-title">Fresas con Chocolate</h3>
                 <p class="product-description">
-                    Fresas frescas y jugosas cubiertas con nuestro chocolate belga premium. 
+                    Fresas frescas y jugosas cubiertas con nuestro chocolate. 
                     La combinación perfecta entre dulzura y frescura que te transportará al paraíso.
                 </p>
+                <h3 class="product-title">$1.50</h3>
             </div>
 
             <div class="product-card" onclick="openModal('platanos')">
                 <div class="click-indicator">¡Toca aquí!</div>
-                <div class="product-emoji">🍌🍫</div>
-                <h3 class="product-title">Plátanos Gourmet</h3>
+                <img src="WhatsApp_Image_2025-09-09_at_8.07.00_PM-removebg-preview.png" alt="Plátanos con Chocolate" class="product-image">
+                <h3 class="product-title">Pinchos cho</h3>
                 <p class="product-description">
-                    Plátanos maduros envueltos en chocolate negro de 70% cacao, 
-                    decorados con almendras tostadas y un toque de canela.
+                    Pinchos rellenos de chocolates 
                 </p>
+                <h3 class="product-title">$1.25</h3>
             </div>
 
-            <div class="product-card" onclick="openModal('arandanos')">
-                <div class="click-indicator">¡Toca aquí!</div>
-                <div class="product-emoji">🫐🍫</div>
-                <h3 class="product-title">Arándanos Premium</h3>
-                <p class="product-description">
-                    Arándanos frescos bañados en chocolate blanco artesanal, 
-                    perfectos para momentos especiales y celebraciones elegantes.
-                </p>
-            </div>
 
-            <div class="product-card" onclick="openModal('uvas')">
-                <div class="click-indicator">¡Toca aquí!</div>
-                <div class="product-emoji">🍇🍫</div>
-                <h3 class="product-title">Uvas de Lujo</h3>
-                <p class="product-description">
-                    Uvas selectas cubiertas con una mezcla única de chocolates negro, 
-                    con leche y blanco. Una experiencia de sabor incomparable.
-                </p>
-            </div>
 
-            <div class="product-card" onclick="openModal('naranjas')">
-                <div class="click-indicator">¡Toca aquí!</div>
-                <div class="product-emoji">🍊🍫</div>
-                <h3 class="product-title">Naranjas Cristalizadas</h3>
-                <p class="product-description">
-                    Gajos de naranja cristalizados envueltos en chocolate semi-amargo, 
-                    con un contraste cítrico que despierta todos los sentidos.
-                </p>
-            </div>
-
-            <div class="product-card" onclick="openModal('kiwi')">
-                <div class="click-indicator">¡Toca aquí!</div>
-                <div class="product-emoji">🥝🍫</div>
-                <h3 class="product-title">Kiwi Exótico</h3>
-                <p class="product-description">
-                    Rodajas de kiwi deshidratado cubiertas con chocolate negro, 
-                    una combinación tropical y sofisticada para paladares aventureros.
-                </p>
-            </div>
-        </div>
+        
     </section>
 
     <footer class="footer">
@@ -650,67 +692,4 @@
                 Arándanos frescos seleccionados uno a uno, bañados en chocolate blanco artesanal. Una combinación elegante y sofisticada.
             </p>
             <div class="modal-features">
-                <h4>✨ Características especiales:</h4>
-                <ul>
-                    <li>Arándanos frescos seleccionados</li>
-                    <li>Chocolate blanco artesanal</li>
-                    <li>Alto contenido de antioxidantes</li>
-                    <li>Presentación elegante</li>
-                    <li>Ideal para ocasiones especiales</li>
-                </ul>
-            </div>
-            <button class="add-to-cart-btn" onclick="orderProduct('Arándanos Premium', '$18.99')">
-                🛒 Agregar - Ordenar por WhatsApp
-            </button>
-        </div>
-    </div>
-
-    <!-- Modal Uvas -->
-    <div id="modal-uvas" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('uvas')">&times;</button>
-            <img src="https://images.unsplash.com/photo-1537640538966-79f369143f8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Uvas con Chocolate" class="modal-image">
-            <h2 class="modal-title">🍇 Uvas de Lujo</h2>
-            <div class="modal-price">$22.99 USD</div>
-            <p class="modal-description">
-                Selección exquisita de uvas dulces cubiertas con trio de chocolates: negro, con leche y blanco. Una experiencia gastronómica incomparable.
-            </p>
-            <div class="modal-features">
-                <h4>✨ Características especiales:</h4>
-                <ul>
-                    <li>Uvas selectas de viñedos premium</li>
-                    <li>Trio de chocolates: negro, leche y blanco</li>
-                    <li>Sabor equilibrado y sofisticado</li>
-                    <li>Presentación de lujo</li>
-                    <li>Experiencia gastronómica única</li>
-                </ul>
-            </div>
-            <button class="add-to-cart-btn" onclick="orderProduct('Uvas de Lujo', '$22.99')">
-                🛒 Agregar - Ordenar por WhatsApp
-            </button>
-        </div>
-    </div>
-
-    <!-- Modal Naranjas -->
-    <div id="modal-naranjas" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('naranjas')">&times;</button>
-            <img src="https://images.unsplash.com/photo-1547514701-42782101795e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Naranjas Cristalizadas" class="modal-image">
-            <h2 class="modal-title">🍊 Naranjas Cristalizadas</h2>
-            <div class="modal-price">$16.99 USD</div>
-            <p class="modal-description">
-                Gajos de naranja cristalizados artesanalmente, envueltos en chocolate semi-amargo. El contraste perfecto entre dulce y cítrico.
-            </p>
-            <div class="modal-features">
-                <h4>✨ Características especiales:</h4>
-                <ul>
-                    <li>Naranjas cristalizadas artesanalmente</li>
-                    <li>Chocolate semi-amargo de origen</li>
-                    <li>Proceso de cristalización tradicional</li>
-                    <li>Contraste dulce-cítrico perfecto</li>
-                    <li>Experiencia sensorial única</li>
-                </ul>
-            </div>
-            <button class="add-to-cart-btn" onclick="orderProduct('Naranjas Cristalizadas', '$16.99')">
-                🛒 Agregar - Ordenar por WhatsApp
-            </button>
+                <h4>
